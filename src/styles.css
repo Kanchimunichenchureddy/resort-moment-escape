@@ -60,6 +60,9 @@
 
 :root {
   --radius: 0.625rem;
+  --shadow-hero-cta: 0 12px 32px -8px oklch(0.18 0.03 175 / 0.55);
+  --shadow-card: 0 18px 44px -18px oklch(0.18 0.03 175 / 0.28);
+  --shadow-float: 0 24px 60px -12px oklch(0.15 0.03 175 / 0.5);
   --background: oklch(0.971 0.01 87.5);          /* warm ivory  #F8F5EE */
   --foreground: oklch(0.247 0.019 178.8);        /* charcoal    #172421 */
   --card: oklch(1 0 0);                          /* white       #FFFFFF */
