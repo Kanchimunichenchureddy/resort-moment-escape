@@ -60,6 +60,8 @@ export function GallerySection() {
 
   const close = () => setActive(null);
 
+  const activeImage = active === null ? undefined : images[active];
+
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (active === null) return;
     if (event.key === "Escape") close();
@@ -108,11 +110,11 @@ export function GallerySection() {
       </div>
 
       {/* Lightbox */}
-      {active !== null ? (
+      {activeImage ? (
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={images[active].caption}
+          aria-label={activeImage.caption}
           className="fixed inset-0 z-[60] flex items-center justify-center bg-[oklch(0.12_0.02_175_/_0.92)] p-4"
           onClick={close}
           onKeyDown={onKeyDown}
@@ -141,12 +143,12 @@ export function GallerySection() {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={images[active].src}
-              alt={images[active].alt}
+              src={activeImage.src}
+              alt={activeImage.alt}
               className="max-h-[76vh] w-auto rounded-xl object-contain"
             />
             <figcaption className="mt-3 text-center text-sm text-background/80">
-              {images[active].caption}
+              {activeImage.caption}
             </figcaption>
           </figure>
           <button
