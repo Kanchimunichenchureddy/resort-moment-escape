@@ -1,77 +1,72 @@
-import { MapPin, Compass } from "lucide-react";
+import { Landmark, MapPin, Compass, Waves } from "lucide-react";
+import { nearby } from "@/data/property";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 
-/**
- * Local experiences around Srikalahasti.
- *
- * Only widely established attractions are listed; travel distances are
- * deliberately omitted until verified (see docs/PROPERTY_RESEARCH.md).
- */
-const experiences = [
-  {
-    name: "Srikalahasti Temple",
-    description:
-      "One of the most revered Shiva temples in South India — the famed Kalahasteeswara shrine, minutes from the resort.",
-  },
-  {
-    name: "Srikalahasti town & bazaars",
-    description:
-      "Temple-town streets, local crafts, and traditional Andhra food a short ride from your room.",
-  },
-  {
-    name: "Tirupati & Tirumala",
-    description:
-      "The famous pilgrimage centre lies within easy reach for a day trip — ask us and we'll point you the right way.",
-  },
-] as const;
+const icons: Record<string, typeof Landmark> = {
+  temple: Landmark,
+  kannappa: MapPin,
+  tirtham: Compass,
+  waterfalls: Waves,
+};
 
+/**
+ * Nearby attractions, from the verified research (docs/PROPERTY_RESEARCH.md).
+ * Distances are approximations from single listings or the official temple
+ * website, and are always presented with the footnote below. The temple
+ * distance is deliberately kept qualitative ("a short walk") because public
+ * sources conflict (322 m vs 800 m).
+ */
 export function ExperiencesSection() {
   return (
     <section id="experiences" className="scroll-mt-24 bg-sand/40 py-20 md:py-28">
       <div className="container-editorial">
         <SectionHeading
-          eyebrow="Local Experiences"
+          eyebrow="Nearby & Around"
           title="Discover Srikalahasti"
-          description="The resort sits in temple country — sacred sites, local flavours, and easy day trips."
+          description="The resort sits in temple country — sacred sites, riverside tirthams, and easy outings."
         />
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {experiences.map((experience, index) => (
-            <Reveal key={experience.name} delay={index * 100}>
-              <article className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 shadow-[var(--shadow-card)] transition-transform duration-300 hover:-translate-y-1">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-forest">
-                  {index === 0 ? (
-                    <MapPin className="h-5 w-5" aria-hidden="true" />
-                  ) : (
-                    <Compass className="h-5 w-5" aria-hidden="true" />
-                  )}
-                </span>
-                <h3 className="font-display mt-4 text-xl font-semibold text-foreground">
-                  {experience.name}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {experience.description}
-                </p>
-              </article>
-            </Reveal>
-          ))}
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {nearby.map((place, index) => {
+            const Icon = icons[place.id] ?? Landmark;
+            return (
+              <Reveal key={place.id} delay={index * 90}>
+                <article className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 shadow-[var(--shadow-card)] transition-transform duration-300 hover:-translate-y-1">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-forest">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="font-display mt-4 text-xl font-semibold text-foreground">
+                    {place.name}
+                  </h3>
+                  <p className="text-eyebrow mt-1 text-gold">{place.distance}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {place.description}
+                  </p>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
 
         <Reveal className="mt-10 text-center" delay={80}>
           <p className="text-sm text-muted-foreground">
-            Planning a temple visit?{" "}
+            Distances are approximate, as reported by public listings and the
+            temple's official website —{" "}
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Srikalahasti+Temple"
+              href={property.whatsappHref}
               target="_blank"
               rel="noreferrer"
               className="font-semibold text-forest underline decoration-gold decoration-2 underline-offset-4 transition-colors hover:text-gold"
             >
-              See the temple on Google Maps
-            </a>
+              ask us
+            </a>{" "}
+            and we'll point you the right way.
           </p>
         </Reveal>
       </div>
     </section>
   );
 }
+
+import { property } from "@/data/property";
