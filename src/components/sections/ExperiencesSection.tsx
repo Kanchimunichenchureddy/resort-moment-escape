@@ -1,5 +1,5 @@
 import { Landmark, MapPin, Compass, Waves } from "lucide-react";
-import { nearby } from "@/data/property";
+import { nearby, property } from "@/data/property";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -68,5 +68,3 @@ export function ExperiencesSection() {
     </section>
   );
 }
-
-import { property } from "@/data/property";
