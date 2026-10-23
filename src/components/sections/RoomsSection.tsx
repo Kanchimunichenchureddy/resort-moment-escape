@@ -1,19 +1,18 @@
-import { ArrowRight, BedDouble, Bath, Users } from "lucide-react";
+import { ArrowRight, BedDouble, Wind, Users } from "lucide-react";
 import roomImage from "@/assets/room.jpg";
 import poolImage from "@/assets/pool.jpg";
-import { property } from "@/data/property";
+import { property, rooms } from "@/data/property";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * Rooms & accommodation.
  *
- * IMPORTANT: room categories, capacities and tariffs are NOT invented
- * here (the master brief forbids fabrication). Until the property owner
- * supplies a verified room list, this section presents the accommodation
- * experience and routes every booking action to a real enquiry (call /
- * WhatsApp). Update src/data/property.ts with verified room data when
- * available.
+ * Room count and features come from public listings (see
+ * src/data/property.ts — rooms) and are framed as reported on-page;
+ * room categories and tariffs remain owner-verified only, so all booking
+ * actions route to a real enquiry (call / WhatsApp) and rates are never
+ * published.
  */
 export function RoomsSection() {
   return (
@@ -65,14 +64,18 @@ export function RoomsSection() {
                     Comfortable bedding, freshly prepared for every arrival
                   </li>
                   <li className="flex items-center gap-3">
-                    <Bath className="h-4 w-4 text-gold" aria-hidden="true" />
-                    Clean, well-maintained attached bathrooms
+                    <Wind className="h-4 w-4 text-gold" aria-hidden="true" />
+                    Air-conditioned rooms, with temple views from select rooms
                   </li>
                   <li className="flex items-center gap-3">
                     <Users className="h-4 w-4 text-gold" aria-hidden="true" />
-                    Options for couples, families, and groups
+                    Around {rooms.reportedCount} rooms for couples, families, and groups
                   </li>
                 </ul>
+                <p className="mt-4 text-xs text-muted-foreground">
+                  Room count and features as reported by public listings — our
+                  team confirms every detail for your dates.
+                </p>
               </div>
 
               <div className="mt-8 flex flex-col gap-3">

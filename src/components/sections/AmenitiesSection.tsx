@@ -20,9 +20,9 @@ const icons: Record<string, typeof Waves> = {
 };
 
 /**
- * Amenities grid — only the facilities reported by the public listing.
- * These are provisional (see src/data/property.ts) and must be confirmed
- * by the property owner before publishing.
+ * Amenities grid — facilities corroborated by multiple public sources or a
+ * dated guest account, plus two listed-only items (see src/data/property.ts
+ * and docs/PROPERTY_RESEARCH.md for the sourced breakdown).
  */
 export function AmenitiesSection() {
   return (
@@ -82,5 +82,5 @@ const amenityDescriptions: Record<string, string> = {
   parking: "Space to park your vehicle on the property.",
   breakfast: "Start the day with a freshly prepared meal.",
   "room-service": "Orders brought to your room when you prefer to stay in.",
-  "front-desk": "Our desk is staffed around the clock for your needs.",
+  "front-desk": "Our front desk team is on hand for anything you need.",
 };
